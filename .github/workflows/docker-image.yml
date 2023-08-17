@@ -7,23 +7,23 @@ on:
 
 jobs:
   deploy:
-  runs-on: self-hosted
+    runs-on: self-hosted
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-      
-    - name: Pull updates
-      run: git pull origin main
-      
-    - name : Docker build image
-      run : docker build -t ezopsimg .
-      
-    - name : Docker Stop OldConteiner
-      run : docker stop ezopsconteiner || true
-      
-    - name : Docker remove old conteiner
-      run : docker rm ezopsconteiner || true
-      
-    - name : DOcker run new conteiner based on image
-      run : docker run -d -p 49162:8080 --name ezopsconteiner ezopsimg
-        EOF
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Pull updates
+        run: git pull origin main
+
+      - name: Docker build image
+        run: docker build -t ezopsimg .
+
+      - name: Docker Stop OldConteiner
+        run: docker stop ezopsconteiner || true
+
+      - name: Docker remove old conteiner
+        run: docker rm ezopsconteiner || true
+
+      - name: Docker run new conteiner based on image
+        run: docker run -d -p 49162:8080 --name ezopsconteiner ezopsimg
