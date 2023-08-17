@@ -47,13 +47,13 @@
     }
 
     function getMessages(){
-      $.get('http://localhost:3000/messages', (data) => {
+      $.get('http://35.153.71.198:8080/messages', (data) => {
         data.forEach(addMessages);
       })
     }
 
     function sendMessage(message){
-      $.post('http://localhost:3000/messages', message)
+      $.post('http://35.153.71.198:8080/messages', message)
       getMessages()
     }
 </script>

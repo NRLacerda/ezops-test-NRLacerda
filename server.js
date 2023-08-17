@@ -32,7 +32,7 @@ io.on('connection', (socket) => {
       });
   });
 
-server.listen(3000, ()=>{
+server.listen(8080, ()=>{
     console.log('server is running on port', server.address().port)
 })
 
@@ -41,7 +41,7 @@ server.listen(3000, ()=>{
 app.get('/messages', async (req, res) => {
   try {
     const messages = await Message.find({});
-    res.send(messages);
+    res.status(200).send(messages);
   } catch (error) {
     res.status(500).send('Error fetching messages');
   }
