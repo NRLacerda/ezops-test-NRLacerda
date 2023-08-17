@@ -17,6 +17,6 @@ jobs:
       run: |
         # Assuming your Dockerfile is in the repository root
         docker build -t ezopsimg .
-        sudo docker stop (docker ps -a --latest -q) || true
-        sudo docker rm ( docker ps -a --latest -q) || true
-        docker run -d -p 49160:8080 --name (docker ps -a --latest -q) ezopsimg
+        sudo docker stop $(docker ps -a --latest -q) || true
+        sudo docker rm $(docker ps -a --latest -q) || true
+        docker run -d -p 49160:8080 --name $(docker ps -a --latest -q) ezopsimg
