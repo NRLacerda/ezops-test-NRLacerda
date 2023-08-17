@@ -22,7 +22,7 @@ jobs:
         echo "$SSH_PRIVATE_KEY" > key.pem
 
         # SSH into the EC2 instance and execute commands
-        ssh -i key.pem ubuntu@ec2-35-153-71-198.compute-1.amazonaws.com 'bash -s' << 'EOF'
+        ssh -i key.pem ubuntu@ec2-35-153-71-198.compute-1.amazonaws.com
           # Your deployment commands here
           git pull origin main
           docker build -t ezopsimg .
