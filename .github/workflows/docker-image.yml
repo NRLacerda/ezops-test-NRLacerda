@@ -16,7 +16,7 @@ jobs:
     - name: Deploy to EC2
       run: |
         # Replace with your EC2 instance details
-        EC2_IP=35.153.71.198
+        EC2_IP=ec2-35-153-71-198.compute-1.amazonaws.com
         SSH_PRIVATE_KEY="${{ secrets.EC2_SSH_KEY }}"
         SSH_USER=ubuntu
         
