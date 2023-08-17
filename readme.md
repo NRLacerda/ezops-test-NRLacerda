@@ -6,7 +6,8 @@ Step-by-Step setup
 
 
 1- docker build . -t ezopsimg
-2- docker run -p 49160:8080 -d ezopsimg
+2- docker run -d -p 49160:8080 --name ezopsconteiner ezopsimg
+
 
 
 
