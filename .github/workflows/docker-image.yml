@@ -1,4 +1,4 @@
-name: Automate-Docker-Deploy
+name: Deploy to EC2
 
 on:
   push:
@@ -13,10 +13,22 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Build and Deploy API
+    - name: Deploy to EC2
       run: |
-        # Assuming your Dockerfile is in the repository root
-        docker build -t ezopsimg .
-        sudo docker stop ezopsconteiner || true
-        sudo docker rm ezopsconteiner || true
-        docker run -d -p 49160:8080 --name ezopsconteiner ezopsimg
+        # Replace with your EC2 instance details
+        EC2_IP=35.153.71.198
+        SSH_PRIVATE_KEY="${{ secrets.EC2_SSH_KEY }}"
+        SSH_USER=ubuntu
+        
+        # Save the private key content to a file
+        echo "$SSH_PRIVATE_KEY" > key.pem
+        chmod 600 key.pem
+
+        # SSH into the EC2 instance and execute commands
+        ssh -i key.pem $SSH_USER@$EC2_IP 'bash -s' << 'EOF'
+          # Your deployment commands here
+          docker build -t ezopsimg .
+          docker stop ezopsconteiner || true
+          docker rm ezopsconteiner || true
+          docker run -d -p 49160:8080 --name ezopsconteiner ezopsimg
+        EOF
