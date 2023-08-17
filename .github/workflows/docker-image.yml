@@ -7,26 +7,23 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
-
+  runs-on: self-hosted
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-
-    - name: Deploy to EC2
-      run: |
-        # Replace with your EC2 instance details
-        SSH_PRIVATE_KEY="${{ secrets.EC2_SSH_KEY }}"
-        
-        # Save the private key content to a file
-        echo "$SSH_PRIVATE_KEY" > key.pem
-
-        # SSH into the EC2 instance and execute commands
-        ssh -i key.pem ubuntu@ec2-35-153-71-198.compute-1.amazonaws.com
-          # Your deployment commands here
-          git pull origin main
-          docker build -t ezopsimg .
-          docker stop ezopsconteiner || true
-          docker rm ezopsconteiner || true
-          docker run -d -p 49160:8080 --name ezopsconteiner ezopsimg
+      
+    - name: Pull updates
+      run: git pull origin main
+      
+    - name : Docker build image
+      run : docker build -t ezopsimg .
+      
+    - name : Docker Stop OldConteiner
+      run : docker stop ezopsconteiner || true
+      
+    - name : Docker remove old conteiner
+      run : docker rm ezopsconteiner || true
+      
+    - name : DOcker run new conteiner based on image
+      run : docker run -d -p 49162:8080 --name ezopsconteiner ezopsimg
         EOF
