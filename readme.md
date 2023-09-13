@@ -4,6 +4,16 @@ Tecnologias usadas:
 
 Step-by-Step setup
 
+SERVER
+
+1- baixa  o repositorio
+2- tenha NODE instalado
+3- no repositorio executa um "npm install"
+4- e depois disso "node server.js" pra rodar o backend
+5- a aplicação via estar disponível em localhost:8080
+
+
+
 Para o primeiro building
 
 1- docker build . -t ezopsimg
